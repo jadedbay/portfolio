@@ -4,6 +4,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      spacing: {
+        "1/16": "6.25%",
+      },
       fontSize: {
         "9vw": "9vw",
       },
