@@ -8,28 +8,30 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div class="flex h-screen w-screen items-center justify-center flex-wrap">
-          <div class="w-1/2 flex border-r border-solid border-zinc-300 sm:text-6xl p-8 leading-normal xs:text-9vw animation overflow-hidden">
-            <div class="animate-title-slide-in ml-auto">
-              <span class="font-thin text-right w-full bg-gradient-to-r from-pink-700 to-purple-700 text-transparent bg-clip-text">
+        <div class="min-h-screen flex flex-col justify-between">
+          <div class="flex-grow-[1.6]"></div>
+          <div class="relative h-1/2 w-screen flex justify-center items-center self-center">
+            <div class="w-1/2 border-r border-zinc-300 overflow-hidden">
+              <span class="animate-title-slide-in float-right p-8 font-thin text-3xl sm:text-6xl xs:text-9vw bg-gradient-to-r from-pink-700 to-purple-700 text-transparent bg-clip-text">
                 jaded
                 <span class="font-normal">bay</span>
               </span>
             </div>
+            <div class="w-1/2 p-8 flex flex-col overflow-hidden">
+              {Socials.map((social, index) => (
+                <SocialButton
+                  text={social.name}
+                  icon={social.icon}
+                  url={social.url}
+                  mt={social.mt}
+                  delay={index * 0.125}
+                />
+              ))}
+            </div>
           </div>
-          <div class="w-1/2 p-8 flex flex-col overflow-hidden">
-            {Socials.map((social, index) => (
-              <SocialButton
-                text={social.name}
-                icon={social.icon}
-                url={social.url}
-                mt={social.mt}
-                delay={index * 0.125}
-              />
-            ))}
-          </div>
+          <div class="flex-grow-[0.4]"></div>
           <span
-            class="animate-bounce absolute bottom-1/16 text-zinc-300 hover:text-[#b52f9c] hover:animate-none"
+            class="m-1/16 animate-bounce text-zinc-300 hover:text-[#b52f9c] hover:animate-none self-center"
             onClick={() => {
               window.scrollTo({
                 behavior: "smooth",
@@ -40,7 +42,7 @@ class Home extends Component {
             <IconCaretDown stroke={1} size={32} />
           </span>
         </div>
-        <div class="flex h-screen w-screen bg-zinc-700"></div>
+        <div class="min-h-screen bg-zinc-700"></div>
       </div>
     );
   }

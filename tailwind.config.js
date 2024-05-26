@@ -19,7 +19,7 @@ export default {
       },
       keyframes: {
         "title-slide-in": {
-          "0%": { transform: "translateX(100%)", opacity: 0 },
+          "0%": { transform: "translateX(256px)", opacity: 0 },
           "100%": { transform: "translateX(0)", opacity: 1 },
         },
         "socials-slide-in": {
