@@ -1,8 +1,12 @@
 import { Component } from "preact";
 import SocialButton from "@components/Home/SocialButton";
 import Socials from "@modules/common/Socials";
+import ProjectCard from "@components/Home/ProjectCard";
 
-import { IconCaretDown } from "@tabler/icons-react";
+import BevyProceduralGrassImage from "@assets/projects/bevy_procedural_grass.png";
+import PortfolioImage from "@assets/projects/portfolio.png";
+
+import { IconChevronCompactDown } from "@tabler/icons-react";
 
 class Home extends Component {
   render() {
@@ -10,8 +14,8 @@ class Home extends Component {
       <div>
         <div class="min-h-screen grid">
           <div class="row-start-2 relative w-screen flex justify-center items-center">
-            <div class="w-1/2 border-r border-zinc-300 overflow-hidden">
-              <span class="animate-title-slide-in float-right p-8 font-thin text-3xl sm:text-6xl xs:text-9vw bg-gradient-to-r from-pink-700 to-purple-700 text-transparent bg-clip-text">
+            <div class="w-1/2 border-r border-zinc-500 overflow-hidden">
+              <span class="animate-title-slide-in float-right p-8 font-thin text-3xl sm:text-6xl xs:text-[9vw] bg-gradient-to-r from-pink-700 to-purple-700 text-transparent bg-clip-text">
                 jaded
                 <span class="font-normal">bay</span>
               </span>
@@ -30,18 +34,51 @@ class Home extends Component {
           </div>
           <div class="row-start-3 flex justify-center align-center">
             <span
-              class="animate-bounce text-zinc-300 hover:text-[#b52f9c] hover:animate-none self-center"
+              class="animate-bounce text-zinc-400 hover:text-[#b52f9c] hover:animate-none self-center"
               onClick={() => {
                 document
                   .getElementById("projects")
                   ?.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <IconCaretDown stroke={1} size={32} />
+              <IconChevronCompactDown stroke={1} size={32} />
             </span>
           </div>
         </div>
-        <div id="projects" class="min-h-screen bg-zinc-700"></div>
+        <div
+          id="projects"
+          class="min-h-screen p-4 bg-zinc-700 grid xs:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 w-screen place-items-center place-content-start"
+        >
+          <ProjectCard
+            title="Bevy Procedural Grass"
+            description="A Bevy plugin for generating grass"
+            img={BevyProceduralGrassImage}
+            repoUrl="https://github.com/jadedbay/bevy_procedural_grass"
+          />
+          <ProjectCard
+            title="Portfolio"
+            description="My portfolio website (you're looking at it)"
+            img={PortfolioImage}
+            repoUrl="https://github.com/jadedbay/portfolio"
+          />
+          <ProjectCard
+            title="Bevy Procedural Grass"
+            description="A Bevy plugin for generating grass"
+            img={BevyProceduralGrassImage}
+            repoUrl="https://github.com/jadedbay/bevy_procedural_grass"
+          />
+          <ProjectCard
+            title="Bevy Procedural Grass"
+            description="A Bevy plugin for generating grass"
+            img={BevyProceduralGrassImage}
+            repoUrl="https://github.com/jadedbay/bevy_procedural_grass"
+          />
+          <ProjectCard
+            title="Bevy Compute Noise"
+            description="A Bevy plugin for creating noise textures using compute shaders"
+            repoUrl="https://github.com/jadedbay/bevy_compute_noise"
+          />
+        </div>
       </div>
     );
   }

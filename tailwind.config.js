@@ -4,12 +4,6 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      spacing: {
-        "1/16": "6.25%",
-      },
-      fontSize: {
-        "9vw": "9vw",
-      },
       colors: {
         "off-black": "#141414",
       },
@@ -31,6 +25,8 @@ export default {
     screens: {
       xs: "420px",
       ...defaultTheme.screens,
+      "2xl": "1920px",
+      "3xl": "2320px",
     },
   },
   plugins: [],

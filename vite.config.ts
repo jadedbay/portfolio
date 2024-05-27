@@ -13,6 +13,7 @@ export default defineConfig({
       "@routes": "/src/routes",
       "@components": "/src/components",
       "@modules": "/src/modules",
+      "@assets": "/src/assets",
     },
   },
   server: {

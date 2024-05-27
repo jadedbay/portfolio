@@ -11,7 +11,8 @@
       "react-dom": ["./node_modules/preact/compat/"],
       "@routes/*": ["routes/*"],
       "@components/*": ["components/*"],
-      "@modules/*": ["modules/*"]
+      "@modules/*": ["modules/*"],
+      "@assets/*": ["assets/*"]
     },
 
     /* Bundler mode */
