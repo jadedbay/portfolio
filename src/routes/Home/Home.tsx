@@ -2,6 +2,7 @@ import { Component } from "preact";
 import SocialButton from "@components/Home/SocialButton";
 import Socials from "@modules/common/Socials";
 import ProjectCard from "@components/Home/ProjectCard";
+import { Link } from "@components/common/Link";
 
 import BevyProceduralGrassImage from "@assets/projects/bevy_procedural_grass.png";
 import PortfolioImage from "@assets/projects/portfolio.png";
@@ -26,7 +27,6 @@ class Home extends Component {
                   text={social.name}
                   icon={social.icon}
                   url={social.url}
-                  mt={social.mt}
                   delay={index * 0.125}
                 />
               ))}
@@ -47,36 +47,39 @@ class Home extends Component {
         </div>
         <div
           id="projects"
-          class="min-h-screen p-4 bg-zinc-700 grid xs:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 w-screen place-items-center place-content-start"
+          class="min-h-screen p-4 bg-zinc-700 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 w-screen place-items-center place-content-start items-start"
         >
-          <ProjectCard
-            title="Bevy Procedural Grass"
-            description="A Bevy plugin for generating grass"
-            img={BevyProceduralGrassImage}
-            repoUrl="https://github.com/jadedbay/bevy_procedural_grass"
-          />
           <ProjectCard
             title="Portfolio"
             description="My portfolio website (you're looking at it)"
             img={PortfolioImage}
             repoUrl="https://github.com/jadedbay/portfolio"
+            link={[Link.Site, "https://jadedbay.com"]}
           />
           <ProjectCard
             title="Bevy Procedural Grass"
             description="A Bevy plugin for generating grass"
             img={BevyProceduralGrassImage}
             repoUrl="https://github.com/jadedbay/bevy_procedural_grass"
-          />
-          <ProjectCard
-            title="Bevy Procedural Grass"
-            description="A Bevy plugin for generating grass"
-            img={BevyProceduralGrassImage}
-            repoUrl="https://github.com/jadedbay/bevy_procedural_grass"
+            link={[
+              Link.Demo,
+              "https://github.com/jadedbay/bevy_procedural_grass",
+            ]}
           />
           <ProjectCard
             title="Bevy Compute Noise"
-            description="A Bevy plugin for creating noise textures using compute shaders"
+            description="A Bevy plugin for creating 2D/3D noise textures using compute shaders"
             repoUrl="https://github.com/jadedbay/bevy_compute_noise"
+            link={[Link.Demo, "https://github.com/jadedbay/bevy_compute_noise"]}
+          />
+          <ProjectCard
+            title="Discord FaceIt Schedule"
+            description="A Discord Bot that notifies teams of upcoming FaceIt matches"
+            repoUrl="https://github.com/jadedbay/DiscordFaceitSchedule"
+            link={[
+              Link.InviteBot,
+              "https://github.com/jadedbay/DiscordFaceitSchedule",
+            ]}
           />
         </div>
       </div>

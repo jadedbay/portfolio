@@ -4,7 +4,6 @@ interface SocialButtonProps {
   text: string;
   icon: string;
   url: string;
-  mt: number;
   delay: number;
 }
 
@@ -12,7 +11,6 @@ export default function SocialButton({
   text,
   icon,
   url,
-  mt,
   delay,
 }: SocialButtonProps) {
   return (
@@ -26,7 +24,7 @@ export default function SocialButton({
       >
         <span class="bg-gradient-to-r from-purple-700 to-pink-700 bg-clip-text flex items-center text-[#b52f9c] xs:text-transparent">
           <SVGString $src={icon} class="h-6 inline" />
-          <span class="pl-3">{text}</span>
+          <span class="pl-3 -translate-y-[1px]">{text}</span>
         </span>
       </a>
     </div>
