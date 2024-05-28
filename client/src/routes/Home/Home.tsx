@@ -50,36 +50,41 @@ class Home extends Component {
           class="min-h-screen p-4 bg-zinc-700 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 w-screen place-items-center place-content-start items-start"
         >
           <ProjectCard
-            title="Portfolio"
-            description="My portfolio website (you're looking at it)"
-            img={PortfolioImage}
-            repoUrl="https://github.com/jadedbay/portfolio"
-            link={[Link.Site, "https://jadedbay.com"]}
-          />
-          <ProjectCard
             title="Bevy Procedural Grass"
             description="A Bevy plugin for generating grass"
             img={BevyProceduralGrassImage}
             repoUrl="https://github.com/jadedbay/bevy_procedural_grass"
-            link={[
-              Link.Demo,
-              "https://github.com/jadedbay/bevy_procedural_grass",
-            ]}
+            link={{
+              link: Link.Demo,
+              url: "https://github.com/jadedbay/bevy_procedural_grass",
+            }}
+            stars={true}
+            crateDownloads={true}
           />
           <ProjectCard
             title="Bevy Compute Noise"
             description="A Bevy plugin for creating 2D/3D noise textures using compute shaders"
             repoUrl="https://github.com/jadedbay/bevy_compute_noise"
-            link={[Link.Demo, "https://github.com/jadedbay/bevy_compute_noise"]}
+            link={{
+              link: Link.Demo,
+              url: "https://github.com/jadedbay/bevy_compute_noise",
+            }}
+          />
+          <ProjectCard
+            title="Portfolio"
+            description="My portfolio website (you're looking at it)"
+            img={PortfolioImage}
+            repoUrl="https://github.com/jadedbay/portfolio"
+            link={{ link: Link.Site, url: "https://jadedbay.com" }}
           />
           <ProjectCard
             title="Discord FaceIt Schedule"
             description="A Discord Bot that notifies teams of upcoming FaceIt matches"
             repoUrl="https://github.com/jadedbay/DiscordFaceitSchedule"
-            link={[
-              Link.InviteBot,
-              "https://github.com/jadedbay/DiscordFaceitSchedule",
-            ]}
+            link={{
+              link: Link.InviteBot,
+              url: "https://github.com/jadedbay/DiscordFaceitSchedule",
+            }}
           />
         </div>
       </div>

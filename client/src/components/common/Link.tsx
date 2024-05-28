@@ -18,7 +18,7 @@ function LinkButton({ link, url }: LinkProps) {
   switch (link) {
     case Link.Demo:
       text += "View Demo";
-      linkClass += " bg-purple-700 hover:bg-purple-800";
+      linkClass += " bg-purple-600 hover:bg-purple-700";
       break;
     case Link.Site:
       text += "View Site";
@@ -32,7 +32,7 @@ function LinkButton({ link, url }: LinkProps) {
   return (
     <a href={url} class={linkClass}>
       <span class="text-zinc-300 font-medium -translate-y-[1px]">{text}</span>
-      <span class="mr-2 group-hover:translate-x-[50%] group-hover:duration-500 transition-transform duration-250 ">
+      <span class="mr-2 group-hover:translate-x-[50%] group-hover:duration-500 transition-transform duration-250">
         <IconArrowRight />
       </span>
     </a>

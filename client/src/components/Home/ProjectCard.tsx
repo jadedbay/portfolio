@@ -1,4 +1,6 @@
-import { Link, LinkButton } from "@components/common/Link";
+import { LinkButton, LinkProps } from "@components/common/Link";
+import Stargazers from "@components/common/Stargazers";
+import CrateDownloads from "@components/common/CrateDownloads";
 import SVGString from "@components/common/SVGString";
 import { siGithub } from "simple-icons";
 
@@ -7,7 +9,9 @@ interface ProjectCardProps {
   description: string;
   img?: string;
   repoUrl: string;
-  link?: [Link, string];
+  link?: LinkProps;
+  stars?: boolean;
+  crateDownloads?: boolean;
 }
 
 export default function ProjectCard({
@@ -16,9 +20,15 @@ export default function ProjectCard({
   img,
   repoUrl,
   link,
+  stars,
+  crateDownloads,
 }: ProjectCardProps) {
   return (
-    <div class="pb-8 w[18rem] xs:w-[24rem] m-4 rounded-xl bg-zinc-900 flex flex-col shadow-off-black shadow-2xl">
+    <div class="pb-8 w-[18rem] xs:w-[24rem] m-4 rounded-xl bg-zinc-900 flex flex-col shadow-off-black shadow-2xl">
+      <div class="absolute flex flex-row-reverse w-[18rem] xs:w-[24rem]">
+        {stars && <Stargazers url={repoUrl} />}
+        {crateDownloads && <CrateDownloads />}
+      </div>
       <img src={img} class="h-[15rem] object-cover rounded-[0.75rem]" />
       <span class="px-4 pt-4 text-zinc-200 font-bold text-xl">{title}</span>
       <span class="px-4 pt-4 text-zinc-400">{description}</span>
@@ -31,7 +41,7 @@ export default function ProjectCard({
           View Code
         </span>
       </a>
-      {link && <LinkButton link={link[0]} url={link[1]} />}
+      {link && <LinkButton link={link.link} url={link.url} />}
     </div>
   );
 }
