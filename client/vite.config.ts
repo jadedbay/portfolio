@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const port = +(process.env.PORT || 8080);
+const port = +(process.env.CLIENT_PORT || 8080);
 
 export default defineConfig({
   plugins: [preact()],
@@ -21,7 +21,7 @@ export default defineConfig({
     strictPort: true,
     host: true,
     proxy: {
-      "/api": "http://localhost:8737",
+      "/api": `http://localhost:${process.env.SERVER_PORT}`,
     },
   },
 });

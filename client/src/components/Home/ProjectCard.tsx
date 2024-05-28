@@ -27,7 +27,7 @@ export default function ProjectCard({
     <div class="pb-8 w-[18rem] xs:w-[24rem] m-4 rounded-xl bg-zinc-900 flex flex-col shadow-off-black shadow-2xl">
       <div class="absolute flex flex-row-reverse w-[18rem] xs:w-[24rem]">
         {stars && <Stargazers url={repoUrl} />}
-        {crateDownloads && <CrateDownloads />}
+        {crateDownloads && <CrateDownloads url={repoUrl} />}
       </div>
       <img src={img} class="h-[15rem] object-cover rounded-[0.75rem]" />
       <span class="px-4 pt-4 text-zinc-200 font-bold text-xl">{title}</span>

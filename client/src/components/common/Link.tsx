@@ -40,3 +40,4 @@ function LinkButton({ link, url }: LinkProps) {
 }
 
 export { Link, LinkButton };
+export type { LinkProps };

@@ -1,12 +1,16 @@
+import express from "express";
+
+import github from "./routes/github";
+import crates from "./routes/crates";
+
 import dotenv from "dotenv";
 dotenv.config();
 
-import express from "express";
 const app = express();
 
-import github from "./routes/github";
 app.use("/api/github", github);
+app.use("/api/crates", crates);
 
-app.listen(8737, () => {
-    console.log("Server is running on port 8737");
+app.listen(process.env.SERVER_PORT, () => {
+    console.log(`Server is running on port ${process.env.SERVER_PORT}`);
 });
