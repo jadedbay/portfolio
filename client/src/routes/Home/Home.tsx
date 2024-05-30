@@ -6,6 +6,7 @@ import { Link } from "@components/common/Link";
 
 import BevyProceduralGrassImage from "@assets/projects/bevy_procedural_grass.png";
 import PortfolioImage from "@assets/projects/portfolio.png";
+import BevyComputeNoiseImage from "@assets/projects/bevy_compute_noise.png";
 
 import { IconChevronCompactDown } from "@tabler/icons-react";
 
@@ -56,7 +57,7 @@ class Home extends Component {
             repoUrl="https://github.com/jadedbay/bevy_procedural_grass"
             link={{
               link: Link.Demo,
-              url: "https://github.com/jadedbay/bevy_procedural_grass",
+              url: "/demo/bevy_procedural_grass",
             }}
             stars={true}
             crateDownloads={true}
@@ -64,11 +65,13 @@ class Home extends Component {
           <ProjectCard
             title="Bevy Compute Noise"
             description="A Bevy plugin for creating 2D/3D noise textures using compute shaders"
+            img={BevyComputeNoiseImage}
             repoUrl="https://github.com/jadedbay/bevy_compute_noise"
             link={{
               link: Link.Demo,
               url: "https://github.com/jadedbay/bevy_compute_noise",
             }}
+            crateDownloads={true}
           />
           <ProjectCard
             title="Portfolio"

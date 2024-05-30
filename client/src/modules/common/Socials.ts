@@ -10,7 +10,7 @@ export default [
   {
     name: "Twitter",
     icon: siTwitter.svg,
-    url: "https://twitter.com/_jjaded",
+    url: "https://twitter.com/jjadedbay",
     offset: -1,
   },
   {
