@@ -64,7 +64,7 @@ class Home extends Component {
           />
           <ProjectCard
             title="Bevy Compute Noise"
-            description="A Bevy plugin for creating 2D/3D noise textures using compute shaders"
+            description="A Bevy plugin for creating 2D/3D tilable noise textures using compute shaders"
             img={BevyComputeNoiseImage}
             repoUrl="https://github.com/jadedbay/bevy_compute_noise"
             link={{
