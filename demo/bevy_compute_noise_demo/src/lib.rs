@@ -74,7 +74,7 @@ struct NoiseMaterial {
 
 impl Material2d for NoiseMaterial {
     fn fragment_shader() -> ShaderRef {
-        "embedded://bevy_compute_noise_demo/shaders/noise_material.wgsl".into()
+        "embedded://bevy_compute_noise_demo/shaders/noise_2d_material.wgsl".into()
     }
 }
 
@@ -82,7 +82,7 @@ struct NoiseMaterialPlugin;
 
 impl Plugin for NoiseMaterialPlugin {
     fn build(&self, app: &mut App) {
-        embedded_asset!(app, "shaders/noise_material.wgsl")
+        embedded_asset!(app, "shaders/noise_2d_material.wgsl")
     }
 }
 
