@@ -1,1 +1,1 @@
-RUSTFLAGS='--cfg=web_sys_unstable_apis' wasm-pack build --target web --features="bevy/webgpu" --out-dir ../../client/src/wasm/bevy_procedural_grass && rm ../../client/src/wasm/bevy_procedural_grass/.gitignore ../../client/src/wasm/bevy_procedural_grass/package.json
+RUSTFLAGS='--cfg=web_sys_unstable_apis' wasm-pack build --target web --features="bevy/webgpu" --out-dir ../../client/src/wasm/bevy_procedural_grass
