@@ -12,7 +12,7 @@
       "@routes/*": ["routes/*"],
       "@components/*": ["components/*"],
       "@modules/*": ["modules/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
     },
 
     /* Bundler mode */

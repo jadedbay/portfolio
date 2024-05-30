@@ -1,5 +1,6 @@
-use bevy::{prelude::*, asset::embedded_asset, render::{mesh::VertexAttributeValues, render_resource::{AsBindGroup, ShaderRef}, texture::{ImageAddressMode, ImageSampler, ImageSamplerDescriptor}}, sprite::{Material2d, Material2dPlugin, MaterialMesh2dBundle, Mesh2dHandle}, window::{WindowResized, WindowResolution}};
+use bevy::{prelude::*, asset::embedded_asset, render::{mesh::VertexAttributeValues, render_resource::{AsBindGroup, ShaderRef}, texture::{ImageAddressMode, ImageSampler, ImageSamplerDescriptor}}, sprite::{Material2d, Material2dPlugin, MaterialMesh2dBundle, Mesh2dHandle}, window::WindowResized};
 use bevy_compute_noise::prelude::*;
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -14,8 +15,8 @@ pub fn demo(canvas_id: String) {
                 }),
                 ..default()
             }),
+            WorldInspectorPlugin::new(),
             NoiseMaterialPlugin,
-            Material2dPlugin::<NoiseMaterial>::default(),
             ComputeNoisePlugin::<Perlin2d>::default(),
         ))
         .add_systems(Startup, setup)
@@ -82,7 +83,9 @@ struct NoiseMaterialPlugin;
 
 impl Plugin for NoiseMaterialPlugin {
     fn build(&self, app: &mut App) {
-        embedded_asset!(app, "shaders/noise_2d_material.wgsl")
+        embedded_asset!(app, "shaders/noise_2d_material.wgsl");
+
+        app.add_plugins(Material2dPlugin::<NoiseMaterial>::default());
     }
 }
 

@@ -1,8 +1,7 @@
 import { LinkButton, LinkProps } from "@components/common/Link";
 import Stargazers from "@components/common/Stargazers";
 import CrateDownloads from "@components/common/CrateDownloads";
-import SVGString from "@components/common/SVGString";
-import { siGithub } from "simple-icons";
+import GithubLink from "@components/common/GithubLink";
 
 interface ProjectCardProps {
   title: string;
@@ -16,7 +15,6 @@ interface ProjectCardProps {
 
 export default function ProjectCard({
   title,
-  
   description,
   img,
   repoUrl,
@@ -33,15 +31,7 @@ export default function ProjectCard({
       <img src={img} class="h-[15rem] object-cover rounded-[0.75rem]" />
       <span class="px-4 pt-4 text-zinc-200 font-bold text-xl">{title}</span>
       <span class="px-4 pt-4 text-zinc-400">{description}</span>
-      <a
-        href={repoUrl}
-        class="mx-8 mt-8 p-4 rounded-lg bg-zinc-600 hover:bg-zinc-700 inline-flex items-center"
-      >
-        <SVGString $src={siGithub.svg} class="h-6 fill-zinc-300" />
-        <span class="pl-3 text-zinc-300 font-medium -translate-y-[1px]">
-          View Code
-        </span>
-      </a>
+      <GithubLink repoUrl={repoUrl} />
       {link && <LinkButton link={link.link} url={link.url} />}
     </div>
   );
