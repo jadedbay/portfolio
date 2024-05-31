@@ -1,26 +1,50 @@
 use bevy::{asset::embedded_asset, prelude::*, render::{mesh::VertexAttributeValues, render_resource::{AsBindGroup, ShaderRef}, texture::{ImageAddressMode, ImageSampler, ImageSamplerDescriptor}}, sprite::{Material2d, Material2dPlugin, MaterialMesh2dBundle, Mesh2dHandle}, window::WindowResized};
-use bevy_compute_noise::prelude::*;
-use bevy_inspector_egui::quick::WorldInspectorPlugin;
+use bevy_compute_noise::{noise::{self, ComputeNoise}, prelude::*};
+use bevy_inspector_egui::*;
+use bevy_inspector_egui::quick::ResourceInspectorPlugin;
+use inspector_options::ReflectInspectorOptions;
 use wasm_bindgen::prelude::*;
+
+#[derive(Reflect, Resource, Default, InspectorOptions)]
+#[reflect(Resource, InspectorOptions)]
+struct NoiseSettings {
+    noise: NoiseType,
+}
+
+#[derive(Reflect)]
+enum NoiseType {
+    Perlin2D(Perlin2d),
+    Worley2D(Worley2d),
+    Worley3D(Worley3d),
+}
+
+impl Default for NoiseType {
+    fn default() -> Self {
+        NoiseType::Perlin2D(Perlin2d::default())
+    }
+}
 
 #[wasm_bindgen]
 pub fn demo(canvas_id: String) {
     App::new()
-        .add_plugins((
-            DefaultPlugins.set(WindowPlugin {
-                primary_window: Some(Window {
-                    canvas: Some(canvas_id),
-                    resizable: true,
-                    ..default()
-                }),
+        .add_plugins(DefaultPlugins.set(WindowPlugin {
+            primary_window: Some(Window {
+                canvas: Some(canvas_id),
+                resizable: true,
                 ..default()
             }),
-            WorldInspectorPlugin::new(),
+            ..default()
+        }))
+        .register_type::<NoiseSettings>()
+        .add_plugins((
+            ResourceInspectorPlugin::<NoiseSettings>::default(),
             NoiseMaterialPlugin,
             ComputeNoisePlugin::<Perlin2d>::default(),
+            ComputeNoisePlugin::<Worley2d>::default(),
+            ComputeNoisePlugin::<Worley3d>::default(),
         ))
         .add_systems(Startup, setup)
-        .add_systems(Update, on_resize)
+        .add_systems(Update, (regenerate_noise, on_resize))
         .run();
 }
 
@@ -38,6 +62,7 @@ fn setup(
     });
     let handle = images.add(image);
 
+    commands.init_resource::<NoiseSettings>();
 
     let mut quad = Rectangle::default().mesh();
     if let Some(uvs) = quad.attribute_mut(Mesh::ATTRIBUTE_UV_0) {
@@ -57,14 +82,14 @@ fn setup(
             }),
             ..default()
         },
-        ComputeNoiseComponent::<Perlin2d> {
-            image: handle.clone(),
-            noise: Perlin2d::new(0, 5, 4, true),
-        },
+        NoiseImage(handle.clone())
     ));
 
     commands.spawn(Camera2dBundle::default());
 }
+
+#[derive(Component)]
+struct NoiseImage(Handle<Image>);
 
 #[derive(Asset, AsBindGroup, Debug, Clone, Reflect)]
 struct NoiseMaterial {
@@ -97,6 +122,25 @@ fn on_resize(
         for mut transform in query.iter_mut() {
             //web_sys::console::log_1(&format!("Window resized to: {}x{}", e.width, e.height).into());
             transform.scale = Vec3::splat(f32::min(e.width as f32 / 2.0, e.height as f32 - 24.0));
+        }
+    }
+}
+
+fn regenerate_noise(
+    mut images: ResMut<Assets<Image>>,
+    noise_settings: Res<NoiseSettings>,
+    query: Query<&NoiseImage>,
+    mut perlin_2d_queue: ResMut<ComputeNoiseQueue<Perlin2d>>,
+    mut worley_2d_queue: ResMut<ComputeNoiseQueue<Worley2d>>,
+    mut worley_3d_queue: ResMut<ComputeNoiseQueue<Worley3d>>,
+) {
+    if noise_settings.is_changed() {
+        for image in query.iter() {
+            match &noise_settings.noise {
+                NoiseType::Perlin2D(perlin) => perlin_2d_queue.add_image(&mut images, image.0.clone(), perlin.clone()),
+                NoiseType::Worley2D(worley) => worley_2d_queue.add_image(&mut images, image.0.clone(), worley.clone()),
+                NoiseType::Worley3D(worley) => worley_3d_queue.add_image(&mut images, image.0.clone(), worley.clone()),
+            };
         }
     }
 }
