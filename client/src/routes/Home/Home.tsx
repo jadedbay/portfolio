@@ -13,7 +13,7 @@ import { IconChevronCompactDown } from "@tabler/icons-react";
 class Home extends Component {
   render() {
     return (
-      <div>
+      <div class="max-w-[100vw] overflow-x-hidden">
         <div class="min-h-screen grid">
           <div class="row-start-2 relative w-screen flex justify-center items-center">
             <div class="w-1/2 border-r border-zinc-500 overflow-hidden">
@@ -48,7 +48,7 @@ class Home extends Component {
         </div>
         <div
           id="projects"
-          class="min-h-screen p-4 bg-zinc-700 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 w-screen place-items-center place-content-start items-start"
+          class="min-h-screen p-4 bg-zinc-700 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 w-screen place-items-center place-content-start items-start overflow-auto"
         >
           <ProjectCard
             title="Bevy Procedural Grass"
@@ -69,7 +69,7 @@ class Home extends Component {
             repoUrl="https://github.com/jadedbay/bevy_compute_noise"
             link={{
               link: Link.Demo,
-              url: "https://github.com/jadedbay/bevy_compute_noise",
+              url: "/demo/bevy_compute_noise",
             }}
             crateDownloads={true}
           />

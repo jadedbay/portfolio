@@ -1,4 +1,4 @@
-use bevy::{prelude::*, asset::embedded_asset, render::{mesh::VertexAttributeValues, render_resource::{AsBindGroup, ShaderRef}, texture::{ImageAddressMode, ImageSampler, ImageSamplerDescriptor}}, sprite::{Material2d, Material2dPlugin, MaterialMesh2dBundle, Mesh2dHandle}, window::WindowResized};
+use bevy::{asset::embedded_asset, prelude::*, render::{mesh::VertexAttributeValues, render_resource::{AsBindGroup, ShaderRef}, texture::{ImageAddressMode, ImageSampler, ImageSamplerDescriptor}}, sprite::{Material2d, Material2dPlugin, MaterialMesh2dBundle, Mesh2dHandle}, window::WindowResized};
 use bevy_compute_noise::prelude::*;
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use wasm_bindgen::prelude::*;
@@ -91,10 +91,11 @@ impl Plugin for NoiseMaterialPlugin {
 
 fn on_resize(
     mut query: Query<&mut Transform, With<Mesh2dHandle>>,
-    mut resize_reader: EventReader<WindowResized>
+    mut resize_reader: EventReader<WindowResized>,
 ) {
     for e in resize_reader.read() {
         for mut transform in query.iter_mut() {
+            //web_sys::console::log_1(&format!("Window resized to: {}x{}", e.width, e.height).into());
             transform.scale = Vec3::splat(f32::min(e.width as f32 / 2.0, e.height as f32 - 24.0));
         }
     }
