@@ -14,6 +14,7 @@ class DemoPage extends Component<DemoPageProps> {
     }
 
     run = async () => {
+        /* @vite-ignore*/
         const wasmModule = await import(`../../wasm/${this.props.wasmPath}`);
         const { demo } = wasmModule;
         const init = wasmModule.default;

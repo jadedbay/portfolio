@@ -14,7 +14,7 @@ export default function GithubLink({ repoUrl }: GithubLinkProps) {
       >
         <SVGString $src={siGithub.svg} class="h-6 fill-zinc-300" />
         <span class="pl-3 text-zinc-300 font-medium -translate-y-[1px]">
-          View Repo
+          View Code
         </span>
       </a>
     )

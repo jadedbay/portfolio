@@ -55,10 +55,10 @@ class Home extends Component {
             description="A Bevy plugin for generating grass"
             img={BevyProceduralGrassImage}
             repoUrl="https://github.com/jadedbay/bevy_procedural_grass"
-            link={{
-              link: Link.Demo,
-              url: "/demo/bevy_procedural_grass",
-            }}
+            // link={{
+            //   link: Link.Demo,
+            //   url: "/demo/bevy_procedural_grass",
+            // }}
             stars={true}
             crateDownloads={true}
           />

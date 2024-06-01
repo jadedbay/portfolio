@@ -1,4 +1,4 @@
-require('autoprefixer');
+import 'autoprefixer'
 
 export default {
   plugins: {

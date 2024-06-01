@@ -1,0 +1,12 @@
+version: '3'
+services:
+  client:
+    image: client
+    environment:
+      SERVER_PORT: 8737
+    ports:
+      - "7837:7837"
+  server:
+    image: server
+    ports:
+      - "8737:8737"
