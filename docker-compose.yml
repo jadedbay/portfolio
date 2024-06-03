@@ -1,12 +1,14 @@
-version: '3'
 services:
   client:
-    image: client
-    environment:
-      SERVER_PORT: 8737
+    build:
+      context: .
+      dockerfile: client/Dockerfile
     ports:
-      - "7837:7837"
+      - "${CLIENT_PORT}:${CLIENT_PORT}"
   server:
-    image: server
+    build:
+      context: .
+      dockerfile: server/Dockerfile
     ports:
-      - "8737:8737"
+      - "${SERVER_PORT}:${SERVER_PORT}"
+

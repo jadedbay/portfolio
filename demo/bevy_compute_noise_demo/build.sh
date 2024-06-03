@@ -1,1 +1,1 @@
-RUSTFLAGS='--cfg=web_sys_unstable_apis' wasm-pack build --target web --features="bevy/webgpu" --out-dir ../../client/src/wasm/bevy_compute_noise
+RUSTFLAGS='--cfg=web_sys_unstable_apis' wasm-pack build --target web --features="bevy/webgpu" --out-dir ../../src/wasm/bevy_compute_noise

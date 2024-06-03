@@ -80,7 +80,7 @@ class Home extends Component {
             repoUrl="https://github.com/jadedbay/portfolio"
             link={{ link: Link.Site, url: "https://jadedbay.com" }}
           />
-          <ProjectCard
+          {/* <ProjectCard
             title="Discord FaceIt Schedule"
             description="A Discord Bot that notifies teams of upcoming FaceIt matches"
             repoUrl="https://github.com/jadedbay/DiscordFaceitSchedule"
@@ -88,7 +88,7 @@ class Home extends Component {
               link: Link.InviteBot,
               url: "https://github.com/jadedbay/DiscordFaceitSchedule",
             }}
-          />
+          /> */}
         </div>
       </div>
     );

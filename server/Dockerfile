@@ -4,12 +4,9 @@ WORKDIR /server
 
 RUN npm install -g ts-node
 
-COPY package*.json ./
-
+COPY .env server/package*.json ./
 RUN npm install
 
-COPY . .
-
-EXPOSE 8737
+COPY server/ ./
 
 CMD ["npm", "run", "dev"]

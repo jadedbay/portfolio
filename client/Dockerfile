@@ -2,12 +2,9 @@ FROM node:22-alpine
 
 WORKDIR /client
 
-COPY package*.json ./
-
+COPY .env client/package*.json ./
 RUN npm install
 
-COPY . .
-
-EXPOSE 7837
+COPY client/ ./
 
 CMD ["npm", "run", "dev"]
