@@ -1,14 +1,9 @@
 services:
   client:
-    build:
-      context: .
-      dockerfile: client/Dockerfile
+    image: jjadedbay/portfolio:client
     ports:
       - "${CLIENT_PORT}:${CLIENT_PORT}"
   server:
-    build:
-      context: .
-      dockerfile: server/Dockerfile
+    image: jjadedbay/portfolio:server
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
-
