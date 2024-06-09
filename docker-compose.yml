@@ -23,11 +23,13 @@ services:
       - "443:443"
     environment:
       - SERVER_PORT=${SERVER_PORT}
+      - SSL_CERTIFICATE_PATH=${SSL_CERTIFICATE_PATH}
+      - SSL_KEY_PATH=${SSL_KEY_PATH}
     volumes:
       - ./nginx.conf.template:/etc/nginx/nginx.conf.template
       - ./client/dist:/var/www/html
-      - /etc/ssl/certs/jadedbay_com.crt:/etc/nginx/ssl/jadedbay_com.crt:ro
-      - /etc/ssl/private/jadedbay_com.key:/etc/nginx/ssl/jadedbay_com.key:ro
-    command: /bin/bash -c "envsubst '$$SERVER_PORT' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+      - ${SSL_CERTIFICATE_ORIGIN_PATH}:${SSL_CERTIFICATE_PATH}:ro
+      - ${SSL_KEY_ORIGIN_PATH}:${SSL_KEY_PATH}:ro
+    command: /bin/bash -c "envsubst '$$SERVER_PORT $$SSL_CERTIFICATE_PATH $$SSL_KEY_PATH' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
     depends_on:
       - server
