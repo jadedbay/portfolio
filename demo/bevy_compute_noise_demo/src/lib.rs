@@ -18,11 +18,23 @@ enum NoiseType {
     Worley3D(Worley3d),
 }
 
+impl NoiseType {
+    fn is_2d(&self) -> bool {
+        matches!(self,
+            NoiseType::Perlin2D(_) 
+            | NoiseType::Worley2D(_)
+        )
+    }
+}
+
 impl Default for NoiseType {
     fn default() -> Self {
         NoiseType::Perlin2D(Perlin2d::default())
     }
 }
+
+#[derive(Reflect, Resource, Default)]
+struct ImageLayer(u32);
 
 #[wasm_bindgen]
 pub fn demo(canvas_id: String) {
@@ -37,6 +49,7 @@ pub fn demo(canvas_id: String) {
         }))
         .register_type::<NoiseSettings>()
         .add_plugins((
+            ResourceInspectorPlugin::<ImageLayer>::default().run_if(show_image_layer),
             ResourceInspectorPlugin::<NoiseSettings>::default(),
             NoiseMaterialPlugin,
             ComputeNoisePlugin::<Perlin2d>::default(),
@@ -44,7 +57,7 @@ pub fn demo(canvas_id: String) {
             ComputeNoisePlugin::<Worley3d>::default(),
         ))
         .add_systems(Startup, setup)
-        .add_systems(Update, (regenerate_noise, on_resize))
+        .add_systems(Update, (regenerate_noise, on_resize, update_layer))
         .run();
 }
 
@@ -161,7 +174,8 @@ impl Plugin for NoiseMaterialPlugin {
         app.add_plugins((
             Material2dPlugin::<NoiseMaterial>::default(),
             Material2dPlugin::<Noise3dMaterial>::default()
-        ));
+        ))
+        .init_resource::<ImageLayer>();
     }
 }
 
@@ -216,4 +230,22 @@ fn set_visibility(
     for mut visibility in query_3d.iter_mut() {
         *visibility = if is_2d_visible { Visibility::Hidden } else { Visibility::Visible };
     }
+}
+
+fn update_layer(
+    image_layer: Res<ImageLayer>,
+    mut materials: ResMut<Assets<Noise3dMaterial>>,
+    query: Query<&Handle<Noise3dMaterial>>,
+) {
+    if image_layer.is_changed() {
+        for material in query.iter() {
+            materials.get_mut(material).unwrap().layer = image_layer.0;
+        }
+    }
+}
+
+fn show_image_layer(
+    noise_settings: Res<NoiseSettings> 
+) -> bool {
+    !noise_settings.noise.is_2d()
 }
