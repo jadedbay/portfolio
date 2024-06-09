@@ -15,8 +15,8 @@ http {
         listen 443 ssl;
         server_name jadedbay.com;
 	
-	ssl_certificate /etc/nginx/ssl/jadedbay_com.crt;
-	ssl_certificate_key /etc/nginx/ssl/jadedbay_com.key;
+	ssl_certificate ${SSL_CERTIFICATE_PATH};
+	ssl_certificate_key ${SSL_KEY_PATH};
 
 	location /api/ {
             proxy_pass http://server:${SERVER_PORT}/api/;
