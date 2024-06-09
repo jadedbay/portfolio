@@ -1,9 +1,33 @@
 services:
   client:
-    image: jjadedbay/portfolio:client
-    ports:
-      - "${CLIENT_PORT}:${CLIENT_PORT}"
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - ./client:/client
+    command: npm run build
+
   server:
-    image: jjadedbay/portfolio:server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - ./server:/server
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
+    command: npm run dev
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "443:443"
+    environment:
+      - SERVER_PORT=${SERVER_PORT}
+    volumes:
+      - ./nginx.conf.template:/etc/nginx/nginx.conf.template
+      - ./client/dist:/var/www/html
+      - /etc/ssl/certs/jadedbay_com.crt:/etc/nginx/ssl/jadedbay_com.crt:ro
+      - /etc/ssl/private/jadedbay_com.key:/etc/nginx/ssl/jadedbay_com.key:ro
+    command: /bin/bash -c "envsubst '$$SERVER_PORT' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+    depends_on:
+      - server

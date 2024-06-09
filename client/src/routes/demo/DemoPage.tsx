@@ -5,7 +5,8 @@ import GithubLink from "@components/common/GithubLink";
 interface DemoPageProps {
     title: string;
     repoUrl: string;
-    wasmPath: string;
+    demo: any;
+    init: any;
 }
 
 class DemoPage extends Component<DemoPageProps> {
@@ -14,13 +15,8 @@ class DemoPage extends Component<DemoPageProps> {
     }
 
     run = async () => {
-        /* @vite-ignore*/
-        const wasmModule = await import(`../../wasm/${this.props.wasmPath}`);
-        const { demo } = wasmModule;
-        const init = wasmModule.default;
-
-        await init();
-        demo("#bevy");
+        await this.props.init();
+        this.props.demo("#bevy");
     };
 
     render() {

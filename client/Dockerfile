@@ -1,10 +1,6 @@
-FROM node:22-alpine
-
+FROM node:18-alpine
 WORKDIR /client
-
-COPY .env client/package*.json ./
+COPY package*.json ./
 RUN npm install
-
-COPY client/ ./
-
-CMD ["npm", "run", "dev"]
+COPY . .
+RUN npm run build
