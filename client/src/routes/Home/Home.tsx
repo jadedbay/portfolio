@@ -1,4 +1,5 @@
 import { Component } from "preact";
+import NameTitle from "@components/common/NameTitle";
 import SocialButton from "@components/Home/SocialButton";
 import Socials from "@modules/common/Socials";
 import ProjectCard from "@components/Home/ProjectCard";
@@ -17,10 +18,7 @@ class Home extends Component {
         <div class="min-h-screen grid">
           <div class="row-start-2 relative w-screen flex justify-center items-center">
             <div class="w-1/2 border-r border-zinc-500 overflow-hidden">
-              <span class="animate-title-slide-in float-right p-8 font-thin text-3xl sm:text-6xl xs:text-[9vw] bg-gradient-to-r from-pink-700 to-purple-700 text-transparent bg-clip-text">
-                jaded
-                <span class="font-normal">bay</span>
-              </span>
+              <span class="animate-title-slide-in float-right p-8 text-3xl sm:text-6xl xs:text-[9vw]"><NameTitle /></span>
             </div>
             <div class="w-1/2 p-8 flex flex-col overflow-hidden">
               {Socials.map((social, index) => (
