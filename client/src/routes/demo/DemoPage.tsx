@@ -30,10 +30,21 @@ class DemoPage extends Component<DemoPageProps, DemoPageState> {
     componentDidMount() {
         this.run();
         this.fetchReadme();
+        window.scrollTo(0, 0);
     };
 
     fetchReadme = async () => {
-        const response = await fetch('https://raw.githubusercontent.com/jadedbay/bevy_compute_noise/master/README.md');
+        const regex = /github\.com\/([^\/]+)\/([^\/]+)/;
+        const match = this.props.repoUrl.match(regex);
+        var url = "";
+        if (match) {
+            const owner = match[1];
+            const repoName = match[2];
+        
+            url = `https://raw.githubusercontent.com/${owner}/${repoName}/master/README.md`;
+        }
+
+        const response = await fetch(url);
         const text = await response.text();
     
         const usageRegex = /## Usage[\s\S]+?(?=^## [^#])/m;
@@ -56,11 +67,24 @@ class DemoPage extends Component<DemoPageProps, DemoPageState> {
             overrides: {
                 h2: {
                     component: 'h2',
-                    props: { style: { fontSize: '1.75rem', borderBottom: '1px solid #ccc', padding: '0.5rem 0', margin: '0.5rem 0' } },
+                    props: { 
+                        style: { 
+                            fontSize: '1.75rem', 
+                            fontWeight: '500',
+                            borderBottom: '1px solid #ccc', 
+                            padding: '0.5rem 0', 
+                            margin: '0.5rem 0' 
+                        } 
+                    },
                 },
                 h3: {
                     component: 'h3',
-                    props: { style: { fontSize: '1.25rem' } },
+                    props: { 
+                        style: { 
+                            fontSize: '1.25rem',
+                            fontWeight: '500',
+                        } 
+                    },
                 },
                 code: {
                     component: CodeBlock
@@ -79,7 +103,7 @@ class DemoPage extends Component<DemoPageProps, DemoPageState> {
                     <span class="flex mx-12 mt-4 items-center gap-2 self-end"><IconExclamationCircle color="orange"/><span>This demo uses WebGPU and is only available on Chrome version 113+</span></span>
                     <canvas class="!w-[90%] !h-[calc(100vh-12rem)] border border-zinc-500 mx-12 my-6 rounded-xl" id="bevy"></canvas>
                     <div class="!w-[90%]">
-                        <div class="overflow-auto whitespace-pre-wrap m-4 px-8 bg-zinc-700 rounded-lg">
+                        <div class="overflow-auto whitespace-pre-wrap m-4 mb-8 px-8 pb-4 bg-zinc-700 rounded-lg">
                             <Markdown options={markdownOptions}>{this.state.usageContent}</Markdown>
                         </div>
                     </div>
@@ -91,19 +115,10 @@ class DemoPage extends Component<DemoPageProps, DemoPageState> {
 
 const CodeBlock = ({ className, children }: any) => {
     if (className) {
-        const language = className ? className.replace(/lang-/, '') : "rust";
-        return (
-            <SyntaxHighlighter language={language} style={gruvboxDark}>
-                {children}
-            </SyntaxHighlighter>
-        );
+        const language = className.replace(/lang-/, '');
+        return <SyntaxHighlighter language={language} style={gruvboxDark}>{children}</SyntaxHighlighter>;
     } else {
-        const customStyle = {
-            backgroundColor: '#242424',
-            padding: '5px',
-            borderRadius: '5px'
-        };
-        return <code style={customStyle}>{children}</code>;
+        return <code style={{ backgroundColor: '#242424', padding: '5px', borderRadius: '5px' }}>{children}</code>;
     }
 };
 
