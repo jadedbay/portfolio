@@ -73,7 +73,7 @@ class Home extends Component {
           />
           <ProjectCard
             title="Portfolio"
-            description="My portfolio website (you're looking at it)"
+            description="My portfolio website"
             img={PortfolioImage}
             repoUrl="https://github.com/jadedbay/portfolio"
             link={{ link: Link.Site, url: "https://jadedbay.com" }}
